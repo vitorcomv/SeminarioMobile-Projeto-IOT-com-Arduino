@@ -1,6 +1,6 @@
 # SeminarioMobile-Projeto-IOT-com-Arduino
 
-# Este projeto tem como objetivo tornar o trânsito mais acessível para pessoas com mobilidade reduzida. Através do desenvolvimento de um semáforo inteligente utilizando arduino, hadware e softwares, buscamos criar um ambiente urbano mais inclusivo e seguro.
+## Este projeto tem como objetivo tornar o trânsito mais acessível para pessoas com mobilidade reduzida. Através do desenvolvimento de um semáforo inteligente utilizando arduino, hadware e softwares, buscamos criar um ambiente urbano mais inclusivo e seguro.
 
 ## Índice
 
