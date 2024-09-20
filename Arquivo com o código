@@ -1,0 +1,75 @@
+// Definindo os pinos dos LEDs e do buzzer
+const int ledVerde = 8;
+const int ledAmarelo = 9;
+const int ledVermelho = 10;
+const int buzzer = 11;
+const int triggerPin = 12;
+const int echoPin = 13;
+
+// Variáveis para o sensor de proximidade
+long duration;
+int distance;
+
+void setup() {
+  // Configurando os pinos como saída
+  pinMode(ledVerde, OUTPUT);
+  pinMode(ledAmarelo, OUTPUT);
+  pinMode(ledVermelho, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  pinMode(triggerPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  // Inicializando o LED verde
+  digitalWrite(ledVerde, HIGH);
+  digitalWrite(ledAmarelo, LOW);
+  digitalWrite(ledVermelho, LOW);
+  for (int i = 0; i < 5; i++) {
+  	tone(buzzer, 500); // Frequência de 500 Hz para o verde
+  	delay(500);
+   	noTone(buzzer);
+   	delay(500);
+    }
+}
+
+void loop() {
+  // Enviando pulso
+  digitalWrite(triggerPin, LOW);
+  delayMicroseconds(1);
+  digitalWrite(triggerPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(triggerPin, LOW);
+  
+  // Calculando a duração do pulso
+  duration = pulseIn(echoPin, HIGH);
+  
+  // Calculando a distância
+  distance = duration * 0.034 / 2;
+  
+  // Verificando se a distância é menor que 10 cm
+  if (distance < 20) {
+    // Iniciando a contagem regressiva
+    delay(2000); // Tempo de espera antes de mudar para amarelo
+    
+    // Mudando para amarelo
+    digitalWrite(ledVerde, LOW);
+    digitalWrite(ledAmarelo, HIGH);
+    delay(1000); // Tempo no amarelo
+    
+    // Mudando para vermelho e emitindo som contínuo
+    digitalWrite(ledAmarelo, LOW);
+    digitalWrite(ledVermelho, HIGH);
+    tone(buzzer, 1000); // Frequência de 1000 Hz para o vermelho
+    delay(5000); // Tempo no vermelho
+    noTone(buzzer);
+    
+    // Voltando para verde e emitindo som pausado
+    digitalWrite(ledVermelho, LOW);
+    digitalWrite(ledVerde, HIGH);
+    for (int i = 0; i < 7; i++) {
+      tone(buzzer, 500); // Frequência de 500 Hz para o verde
+      delay(500);
+      noTone(buzzer);
+      delay(500);
+    }
+  }
+}
